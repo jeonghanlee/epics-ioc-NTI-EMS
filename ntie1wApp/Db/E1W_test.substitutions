@@ -1,0 +1,44 @@
+global { P="$(PREF):", PORT="$(MODPORT)", SCAN="I/O Intr" }
+
+## NTI E-1W
+## Firmware 3.2
+## Function code 04 : External sensors and Digitial input sensors
+## All response use 2 "16 bit" registers (32bit signed integer or 32bit float)
+## 24 External Sensors   : 48 [24] [00.01][02.03].......[46.47] addresses for external sensors (32 Bit Float LE)
+## 02 Dry contact inputs : 04 [02] [48.49][50.51]               addresses for the on-board digital inputs (32 Bit signed Integer LE)
+## All sensors values are IEEE 32-bit Floating Point Little Endian (the order of bytes is 1,2,3,4)
+## For a contact type sensor : 0 (closed contact) and 1 (open contact)
+## LOPR : Low Operating Range	FLOAT the lower display limits 
+## HOPR : High Operating Range	FLOAT the upper display limits
+## PREC	: Display Precision     SHORT the floating point precision with which to display VAL
+## 
+## global : P, PORT, SCAN
+## local  : OFFSET, R, DATA_TYPE,LOPR,HOPR,PREC
+file "$(DB_TOP)/aiFloat64.template" 
+{ 
+    pattern
+    {OFFSET,                           R,   DATA_TYPE,   LOPR, HOPR,     PREC}
+    {      0, "E1W-E02-01-Temperature-RB",  FLOAT32_LE,     0.0,  500.0,    3}
+    {      2, "E1W-E02-02-Temperature-RB",  FLOAT32_LE,     0.0,  500.0,    3}
+    {      4, "E1W-E02-03-Temperature-RB",  FLOAT32_LE,     0.0,  500.0,    3}
+    {      6, "E1W-E02-04-Temperature-RB",  FLOAT32_LE,     0.0,  500.0,    3}
+    {      8, "E1W-E02-05-Temperature-RB",  FLOAT32_LE,     0.0,  300.0,    3}
+    {     10, "E1W-E02-06-Temperature-RB",  FLOAT32_LE,     0.0,  500.0,    3}
+    {     12, "E1W-E02-07-Temperature-RB",  FLOAT32_LE,     0.0,  500.0,    3}
+    {     14, "E1W-E02-08-Temperature-RB",  FLOAT32_LE,     0.0,  500.0,    3}
+}
+
+## file "$(DB_TOP)/stringin.template"
+## {## 
+##     pattern
+## ## ##     {OFFSET,                           R,   DATA_TYPE}
+##     {      0, "E1W-E02-01-Temperature-SRB",  FLOAT32_LE}
+##     {      2, "E1W-E02-02-Temperature-SRB",  FLOAT32_LE}
+##     {      4, "E1W-E02-03-Temperature-SRB",  FLOAT32_LE}
+##     {      6, "E1W-E02-04-Temperature-SRB",  FLOAT32_LE}
+## ##     {      8, "E1W-E02-05-Temperature-SRB",  FLOAT32_LE}
+##     {     10, "E1W-E02-06-Temperature-SRB",  FLOAT32_LE}
+##     {     12, "E1W-E02-07-Temperature-SRB",  FLOAT32_LE}
+##     {     14, "E1W-E02-08-Temperature-SRB",  FLOAT32_LE}
+## }
+
