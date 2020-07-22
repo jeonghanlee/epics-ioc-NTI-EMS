@@ -31,26 +31,23 @@
 #SNCSEQ = $(MODULES)/seq-ver
 
 # EPICS_BASE should appear last so earlier modules can override stuff:
-EPICS_BASE = /home/jhlee/epics_env/epics-base
-
-
-# EPICS_BASE should appear last so earlier modules can override stuff:
 EPICS_BASE=${EPICS_PATH}/epics-base
 
 # Dependent Modules
 ASYN=${EPICS_MODULES}/asyn
 MODBUS=${EPICS_MODULES}/modbus
-STD=${EPICS_MODULES}/std
+#
+#STD=${EPICS_MODULES}/std
 #SNCSEQ=${EPICS_MODULES}/seq
 
 
 # Optional Modules
-CALC=${EPICS_MODULES}/calc
-devIocStats=${EPICS_MODULES}/iocStats
+#CALC=${EPICS_MODULES}/calc
+#devIocStats=${EPICS_MODULES}/iocStats
 #CAPUTLOG=${EPICS_MODULES}/caPutLog
-RECCASTER=${EPICS_MODULES}/recsync/client
+#RECCASTER=${EPICS_MODULES}/recsync/client
 #AUTOSAVE=${EPICS_MODULES}/autosave
-RETOOLS=${EPICS_MODULES}/retools
+#RETOOLS=${EPICS_MODULES}/retools
 
 
 # Set RULES here if you want to use build rules from somewhere

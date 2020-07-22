@@ -1,0 +1,55 @@
+global { P="$(PREF):", PORT="$(MODPORT)", SCAN="I/O Intr", DATA_TYPE="$(DATATYPE)" }
+
+## NTI E-1W
+## Firmware 3.2
+## Function code 04 : External sensors and Digitial input sensors
+## All response use 2 "16 bit" registers (32bit signed integer or 32bit float)
+## 24 External Sensors   : 48 [24] [00.01][02.03].......[46.47] addresses for external sensors (32 Bit Float LE)
+## 02 Dry contact inputs : 04 [02] [48.49][50.51]               addresses for the on-board digital inputs (32 Bit signed Integer LE)
+## All sensors values are IEEE 32-bit Floating Point Little Endian (the order of bytes is 1,2,3,4)
+## For a contact type sensor : 0 (closed contact) and 1 (open contact)
+## LOPR : Low Operating Range	FLOAT the lower display limits 
+## HOPR : High Operating Range	FLOAT the upper display limits
+## PREC	: Display Precision     SHORT the floating point precision with which to display VAL
+## 
+## global : P, PORT, SCAN
+## local  : OFFSET, R, DATA_TYPE,LOPR,HOPR,PREC
+file "aiFloat64.template" 
+{ 
+    pattern
+    {OFFSET,                           R,   LOPR, HOPR,  PREC}
+    {      0, "E1W-E02-01-Temperature-RB",  0,  500,    10}
+    {      2, "E1W-E02-02-Temperature-RB",  0,  500,    10}
+    {      4, "E1W-E02-03-Temperature-RB",  0,  500,    10}
+    {      6, "E1W-E02-04-Temperature-RB",  0,  500,    10}
+    {      8, "E1W-E02-05-Temperature-RB",  0,  500,    10}
+    {     10, "E1W-E02-06-Temperature-RB",  0,  500,    10}
+    {     12, "E1W-E02-07-Temperature-RB",  0,  500,    10}
+    {     14, "E1W-E02-08-Temperature-RB",  0,  500,    10}
+    {     16, "E1W-E02-09-Temperature-RB",  0,  500,    10}
+    {     18, "E1W-E02-10-Temperature-RB",  0,  500,    10}
+    {     20, "E1W-E02-11-Temperature-RB",  0,  500,    10}
+    {     22, "E1W-E02-12-Temperature-RB",  0,  500,    10}
+    {     24, "E1W-E02-13-Temperature-RB",  0,  500,    10}
+    {     26, "E1W-E02-14-Temperature-RB",  0,  500,    10}
+    {     28, "E1W-E02-15-Temperature-RB",  0,  500,    10}
+    {     30, "E1W-E02-16-Temperature-RB",  0,  500,    10}
+    {     32, "E1W-E02-17-Temperature-RB",  0,  500,    10}
+    {     34, "E1W-E02-18-Temperature-RB",  0,  500,    10}
+    {     36, "E1W-E02-19-Temperature-RB",  0,  500,    10}
+    {     38, "E1W-E02-20-Temperature-RB",  0,  500,    10}
+    {     40, "E1W-E02-21-Temperature-RB",  0,  500,    10}
+    {     42, "E1W-E02-22-Temperature-RB",  0,  500,    10}
+    {     44, "E1W-E02-23-Temperature-RB",  0,  500,    10}
+    {     46, "E1W-E02-24-Temperature-RB",  0,  500,    10}
+}
+
+## global : P, PORT, SCAN
+## local  : OFFSET, R, DATA_TYPE
+file "longinInt32.template" 
+{ 
+    pattern
+    {OFFSET,                           R}
+    {     48, "E1W-E02-01-DigitalInput-RB"}
+    {     50, "E1W-E02-02-DigitalInput-RB"}
+}

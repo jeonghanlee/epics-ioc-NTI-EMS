@@ -1,0 +1,28 @@
+#- TCP_NAME       - MODBUS TCP <name> on address <IPaddr> port <port>
+#- INET           - MODBUS IP address
+#- PORT           - ASYN   MODBUS Port, Default : 502
+#- PRIORITY       - ASYN   PRIORITY, Default : 0
+#- NOAUTOCONNECT  - ASYN   noAutoconnect, Default : 0
+#-                         0 :    Auto connection
+#-                         1 : no Auto connection
+#- NOPROCESSEOS   - ASYN   noProcessEos, Default : 1
+#- LINKTYPE       - MODBUS linktype, Default : 0
+#-                  0 = TCP/IP
+#-                  1 = RTU
+#-                  2 = ASCII 
+#- TIMEOUT        - MODBUS timeout (ms), Default : 2000
+#-                  0 -> 2000 (By modbus)
+#- WRITEDELAY     - MODBUS write delay ms
+#-                  for Serial RTU
+#- ASYN_OPT_ENABLE : Default : Disable
+#- 
+#- iocshLoad("modbusPortConfigure.iocsh", "TCP_NAME=TestMod1")
+#- iocshLoad("modbusPortConfigure.iocsh", "TCP_NAME=TestMod1,ASYN_OPT_ENABLE=")
+#- iocshLoad("modbusPortConfigure.iocsh", "TCP_NAME=TestMod1, INET=10.0.0.100, PORT=502, TIMEOUT=3000")
+#-
+#- https://epics.anl.gov/modules/soft/asyn/R4-29/asynDriver.html#drvAsynSerialPort
+drvAsynIPPortConfigure($(TCP_NAME),$(INET=127.0.0.1):$(PORT=5020),$(PRIORITY=0),$(NOAUTOCONNECT=0),$(NOPROCESSEOS=1))
+$(ASYN_OPT_ENABLE="#")asynSetOption($(TCP_NAME),0,"disconnectOnReadTimeout", "Y")
+#- http://cars9.uchicago.edu/software/epics/modbusDoc.html
+modbusInterposeConfig($(TCP_NAME),$(LINKTYPE=0),$(TIMEOUT=5000),$(WRITEDELAY=0))
+#-

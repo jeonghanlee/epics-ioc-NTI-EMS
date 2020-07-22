@@ -1,0 +1,36 @@
+#- NAME           - MODBUS Port Name Prefix
+#- TCP_NAME       - TCP NAME (Modbus TCP)
+#- SERVER_ADDR    - Server Address (Slave), for MODBUS TCP it is Unit ID
+#-                  Default : 1
+#- FUNC_CODE      - Modbus function code 1,2,3,4,5,6,15,16, 123 for 23 RO, 223 for 23 WO
+#-                  Default : 1 : Read  Coil
+#-                            5 : Write Coil
+#- STARTADDR     - Start address 0-65535 decimal for relative addressing
+#-                  Default : 0
+#-                  '-1' for absolute addressing
+#- DATA_LENGTH    - The length of the Modbus data segment to be accessed.
+#-                    bits         : FUNC_CODE 1,2,5,15
+#-                    16-bit words : FUNC_CODE 3,4,5,16, or 23
+#-                    Length limits
+#-                    - FUNC_CODE 1, 2    : 2000
+#-                    - FUNC_CODE 5,15    : 1968
+#-                    - FUNC_CODE 3, 4    :  125
+#-                    - FUNC_CODE 6,16,23 :  123
+#-                  Absolute addressing
+#-                    -   1 : 16-bit registers R/W
+#-                    -   4 : 64-bit floats (4 16 bit)
+#-                    - 100 : Int32 waveform record NELM = 100
+#-                  For DO (Server) / DI (EPICS BI), DATA_LENGTH = START_ADDR + No of Coils. For example,
+#-                  Start addr : 0, and 20 Coils, DATA_LENGTH = 20
+#- 
+#- DATA_TYPE      - Modbus register data types : 0,1,2,3,4,5,6,7,8,9,10,11,12
+#-                  http://htmlpreview.github.io/?https://github.com/epics-modules/modbus/blob/master/documentation/modbusDoc.html  
+#-                  0 : UINT16 Unsigned 16-bit binary integers 
+#-                    
+#- POLL_DELAY     - Read  function : Polling delay time in ms for the polling thread
+#-                  Write function : a non-zero value means that the Modbus data should be read once
+#- MODBUS_TYPE    - Type of Modbus used in asynReprt
+#
+#- iocshLoad("modbusAsynConfigure.iocsh", "NAME=A0_In_Bits, TCP_NAME=TestMod1, POLLY_DELAY=3000")
+#-
+drvModbusAsynConfigure($(NAME),$(TCP_NAME),$(SERVER_ADDR=1),$(FUNC_CODE=1),$(START_ADDR=0),$(DATA_LENGTH=50),$(DATA_TYPE=0),$(POLL_DELAY),$(MODBUS_TYPE=DefaultModbus))

@@ -15,15 +15,20 @@ DBD += ntie1w.dbd
 Common_dbds += base.dbd
 Common_dbds += system.dbd
 Common_dbds += asyn.dbd
-Common_dbds += std.dbd
+
 Common_dbds += modbus.dbd
 Common_dbds += modbusSupport.dbd
 
 Common_libs += asyn
-Common_libs += std
+
 Common_libs += modbus
 
 Common_srcs +=
+
+ifneq ($(STD),)
+Common_dbds += std.dbd
+Common_libs += std
+endif
 
 ifneq ($(CALC),)
 Common_dbds += calcSupport.dbd

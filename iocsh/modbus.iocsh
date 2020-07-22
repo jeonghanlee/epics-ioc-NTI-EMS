@@ -1,0 +1,41 @@
+
+
+#- NAME           - MODBUS <name> on address <IPaddr> port <port>
+#- INET           - MODBUS IP address
+#- PORT           - ASYN   MODBUS Port, Default : 502
+#- PRIORITY       - ASYN   PRIORITY, Default : 0
+#- NOAUTOCONNECT  - ASYN   noAutoconnect, Default : 0
+#-                         0 :    Auto connection
+#-                         1 : no Auto connection
+#- NOPROCESSEOS   - ASYN   noProcessEos, Default : 1
+#- LINKTYPE       - MODBUS linktype, Default : 0
+#-                  0 = TCP/IP
+#-                  1 = RTU
+#-                  2 = ASCII 
+#- TIMEOUT        - MODBUS timeout, Default : 2000
+#-                  ms, 0 -> 2000 (By modbus)
+#- WRITEDELAY     - MODBUS write delay ms
+#- MOD_TYPE       - MODBUS Type, Default="modbus"
+
+#-https://epics.anl.gov/modules/soft/asyn/R4-29/asynDriver.html#drvAsynSerialPort
+drvAsynIPPortConfigure($(NAME), $(INET):$(PORT=502),$(PRIORITY=0),$(NOAUTOCONNECT=0),$(NOPROCESSEOS=1))
+#-http://cars9.uchicago.edu/software/epics/modbusDoc.html
+modbusInterposeConfig($(NAME), $(LINKTYPE=0), $(TIMEOUT=2000), $(WRITEDELAY=0))
+
+epicsEnvSet(MODBUS_RSLAVEADDR, "$(RSLAVE_ADDR=0)")
+epicsEnvSet(MODBUS_RFUNCCODE, "$(RFUNC_CODE=3)")
+epicsEnvSet(MODBUS_RSTART_ADDR, "$(RSTART_ADDR=0)")
+epicsEnvSet(MODBUS_RLENGTH, "$(RLENGTH=1)")
+epicsEnvSet(MODBUS_RDATATYPE, "$(RDATATYPE=0)")
+epicsEnvSet(MODBUS_RPOLLDELAY, "$(RPOLLDELAY=1000)")
+
+epicsEnvSet(MODBUS_WSLAVEADDR, "$(WSLAVE_ADDR=0)")
+epicsEnvSet(MODBUS_WFUNCCODE, "$(WFUNC_CODE=16)")
+epicsEnvSet(MODBUS_WSTART_ADDR, "$(WSTART_ADDR=-1)")
+epicsEnvSet(MODBUS_WLENGTH, "$(WLENGTH=2)")
+epicsEnvSet(MODBUS_WDATATYPE, "$(WDATATYPE=0)")
+epicsEnvSet(MODBUS_WPOLLDELAY, "$(WPOLLDELAY=0)")
+
+
+drvModbusAsynConfigure("$(NAME)Read", $(NAME),$(RSLAVEADDR=0),$(FUNCCODE),$(MODBUS_RSTART_ADDR),$(MODBUS_RLENGTH),$(MODBUS_RDATATYPE),$(MODBUS_RPOLLDELAY),"$(MODBUS_TYPE)")
+drvModbusAsynConfigure("$(NAME)Write",$(NAME),$(WSLAVEADDR=0),$(WFUNCCODE),$(MODBUS_WSTART_ADDR),$(MODBUS_WLENGTH),$(MODBUS_WDATATYPE),$(MODBUS_WPOLLDELAY),"$(MODBUS_TYPE)")
