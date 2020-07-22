@@ -21,9 +21,11 @@ epicsEnvSet("PORT", 5020)
 
 iocshLoad("$(IOCSH_TOP)/modbusPortConfigure.iocsh", "TCP_NAME=$(PORTNAME),INET=$(SERVERIP), ASYN_OPT_ENABLE=")
 
-#asynSetTraceIOMask("$(PORTNAME)",0,4)
+#https://github.com/ISISComputingGroup/ibex_developers_manual/wiki/ASYN-Trace-Masks-(Debugging-IOC,-ASYN)
+asynSetTraceIOTruncateSize("$(PORTNAME)", -1, 1024)
+asynSetTraceIOMask("$(PORTNAME)",0,4)
 # Enable ASYN_TRACE_ERROR and ASYN_TRACEIO_DRIVER on octet server
-#asynSetTraceMask("$(PORTNAME)",0,9)
+asynSetTraceMask("$(PORTNAME)",0,9)
 # IN (Read, EPICS IOC <- Modbus TCP/IP server)
 
 ### to read the values of Internal Sensors, External Sensors, Power Supply, Tachometer
