@@ -43,7 +43,7 @@ LBNL:OneWireIOC:E1W-E02-08-Temperature-RB 79.925
 ...
 ```
 
-|![PhoebusScreen](db_phoebus.png)|
+|![PhoebusScreen](docs/db_phoebus.png)|
 | :---: |
 |**Figure 1** Phoebus Screen.|
 
