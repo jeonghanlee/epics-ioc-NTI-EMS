@@ -1,4 +1,4 @@
-global { P="$(PREF):", PORT="$(MODPORT)", SCAN="I/O Intr", DATA_TYPE="FLOAT32_LEBS" }
+global { P="$(PREF):", PORT="$(MODPORT)", SCAN="I/O Intr", DATA_TYPE="FLOAT32_LE_BS" }
 
 ## NTI E-1W
 ## Firmware 3.2

@@ -7,10 +7,8 @@ It supports 24 single reading 1-wire sensors in any combination, but this exampl
 ## Requirements
 
 * EPICS BASE
-* Asyn
-* modified EPICS Modbus [2]
-
-Please see [docs/DataFormat.md](https://github.com/jeonghanlee/epics-ioc-NTI-E1W/blob/master/docs/DataFormat.md)
+* Asyn R4-40
+* Latest EPICS modbus 54cea0d (Probably R3-1) : The version of Modbus should support `FLOAT32_LE_BS` [2].
 
 ## Firmware
 
@@ -53,4 +51,4 @@ LBNL:OneWireIOC:E1W-E02-08-Temperature-RB 79.925
 
 [1] <http://www.networktechinc.com/environment-monitor-1wire.html>
 
-[2] <https://github.com/jeonghanlee/modbus/tree/bswap16>
+[2] <https://github.com/epics-modules/modbus/pull/20>
