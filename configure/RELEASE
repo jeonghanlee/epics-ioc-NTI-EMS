@@ -43,9 +43,9 @@ MODBUS=${EPICS_MODULES}/modbus
 
 # Optional Modules
 #CALC=${EPICS_MODULES}/calc
-#devIocStats=${EPICS_MODULES}/iocStats
+devIocStats=${EPICS_MODULES}/iocStats
 #CAPUTLOG=${EPICS_MODULES}/caPutLog
-#RECCASTER=${EPICS_MODULES}/recsync/client
+RECCASTER=${EPICS_MODULES}/recsync
 #AUTOSAVE=${EPICS_MODULES}/autosave
 #RETOOLS=${EPICS_MODULES}/retools
 

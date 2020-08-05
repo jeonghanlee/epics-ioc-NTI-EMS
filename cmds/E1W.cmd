@@ -16,7 +16,7 @@ dbLoadDatabase "$(CMDTOP)/dbd/ntie1w.dbd"
 ntie1w_registerRecordDeviceDriver pdbbase
 
 epicsEnvSet("PORTNAME", "modbus")
-epicsEnvSet("SERVERIP", "127.0.0.1")
+epicsEnvSet("SERVERIP", "128.3.128.180")
 epicsEnvSet("PORT", 5020)
 
 iocshLoad("$(IOCSH_TOP)/modbusPortConfigure.iocsh", "TCP_NAME=$(PORTNAME),INET=$(SERVERIP), ASYN_OPT_ENABLE=")
@@ -46,6 +46,9 @@ epicsEnvSet("START_ADDR", 0)
 iocshLoad("$(IOCSH_TOP)/modbusAsynConfigure.iocsh","NAME=$(MOD_NAME),TCP_NAME=$(PORTNAME),FUNC_CODE=$(FUNC_CODE),DATA_LENGTH=$(ELEMENT),DATA_TYPE=$(DATA_TYPE),START_ADDR=$(START_ADDR),POLL_DELAY=1000")
 
 dbLoadTemplate("$(DB_TOP)/E1W_full.substitutions","PREF=$(IOCNAME),MODPORT=$(MOD_NAME),DATATYPE=$(DATATYPE)")
+
+iocshLoad("$(IOCSH_TOP)/iocStats.iocsh",  "IOCNAME=$(IOCNAME), DATABASE_TOP=$(DB_TOP)")
+iocshLoad("$(IOCSH_TOP)/reccaster.iocsh", "IOCNAME=$(IOCNAME), DATABASE_TOP=$(DB_TOP)")
 
 iocInit()
 

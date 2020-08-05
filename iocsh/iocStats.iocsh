@@ -1,0 +1,13 @@
+#- ####################################################
+#- ###         IOCSTATS iocsh                ###
+#- ####################################################
+#- >> Mandatory
+#- IOCNAME            - IOCNAME (A-A:B-B)
+#- DATABASE_TOP       - database TOP path
+#- ###################################################
+#- IOC must not be "longer" than a typical string length
+#- If not, one can see the following Errors:
+#- Can't set  ACCESS.DESC and READACF.DESC
+#-
+dbLoadRecords("$(DATABASE_TOP)/iocAdminSoft.db", "IOC=$(IOCNAME)-IocStats")
+#-
