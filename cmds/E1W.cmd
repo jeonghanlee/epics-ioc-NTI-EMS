@@ -16,7 +16,7 @@ dbLoadDatabase "$(CMDTOP)/dbd/ntie1w.dbd"
 ntie1w_registerRecordDeviceDriver pdbbase
 
 epicsEnvSet("PORTNAME", "modbus")
-epicsEnvSet("SERVERIP", "10.0.0.173")
+epicsEnvSet("SERVERIP", "127.0.0.1")
 epicsEnvSet("PORT", 5020)
 
 iocshLoad("$(IOCSH_TOP)/modbusPortConfigure.iocsh", "TCP_NAME=$(PORTNAME),INET=$(SERVERIP), ASYN_OPT_ENABLE=")
@@ -38,7 +38,7 @@ epicsEnvSet("FUNC_CODE",  4)
 epicsEnvSet("MOD_NAME", "Input_Registers")
 epicsEnvSet("ELEMENT",   52)
 epicsEnvSet("DATA_TYPE",  7)
-epicsEnvSet("DATATYPE",   FLOAT32_LEBS)
+epicsEnvSet("DATATYPE",   FLOAT32_LE_BS)
 #epicsEnvSet("DATA_TYPE",  7)
 #epicsEnvSet("DATATYPE",   "FLOAT32_LE")
 epicsEnvSet("START_ADDR", 0)
