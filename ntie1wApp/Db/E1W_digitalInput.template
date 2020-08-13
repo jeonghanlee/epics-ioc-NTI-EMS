@@ -1,0 +1,39 @@
+record(bo, "$(P)DigitalInput$(ID)_Update-Cmd")
+{
+    field(DESC, "Update DigitalInput$(ID) Readbacks")
+    field(ZNAM, "Update")
+    field(ONAM, "update")
+    field(FLNK, "$(P)DigitalInput$(ID)-DESC-RB")
+    field(HIGH, "2")
+    field( VAL, "1")
+    field(PINI, "YES")
+}
+
+
+record(stringin, "$(P)DigitalInput$(ID)-DESC-RB")
+{
+    field(DESC, "Digital Input$(ID) Name")
+    field(DTYP, "Snmp")
+    field( INP, "@$(HOST) $(USER) $(M)digInputDescription.$(ID) STRING: 40")
+}
+
+
+record(ai, "$(P)DigitalInput$(ID)-RB_")
+{
+    field(DESC, "External Sensor $(ID)")
+    field(DTYP, "Snmp")
+    field(SCAN, "1 second")
+    field(PREC, "3")
+    field( INP, "@$(HOST) $(USER) $(M)digInputValue.$(ID) ( 100 i")
+}
+
+record(mbbi, "$(P)DigitalInput$(ID)-RB")
+{
+    field(DTYP, "Soft Channel")
+    field( INP, "$(P)DigitalInput$(ID)-RB_ CPP")
+    field(ZRST, "close")
+    field(ZRVL, "0")
+    field(ONST, "open")
+    field(ONVL, "1")
+}
+

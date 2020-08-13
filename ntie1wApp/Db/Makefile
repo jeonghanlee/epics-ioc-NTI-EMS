@@ -16,6 +16,7 @@ DB += E1W_full.db
 DB_INSTALLS += $(wildcard $(MODBUS)/db/*.template)
 DB_INSTALLS += $(wildcard $(ASYN)/db/asynRecord*.*)
 DB_INSTALLS += $(TOP)/ntie1wApp/Db/E1W_full.substitutions
+DB_INSTALLS += $(wildcard $(TOP)/ntie1wApp/Db/*.template)
 
 ifneq ($(devIocStats),)
 DB_INSTALLS += $(devIocStats)/db/iocAdminSoft.db

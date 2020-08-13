@@ -18,10 +18,11 @@ Common_dbds += asyn.dbd
 
 Common_dbds += modbus.dbd
 Common_dbds += modbusSupport.dbd
+Common_dbds += devSnmp.dbd
 
 Common_libs += asyn
-
 Common_libs += modbus
+Common_libs += devSnmp
 
 Common_srcs +=
 

@@ -1,0 +1,24 @@
+# Decimal Digit should be needed to call one time
+# when IOC is started
+record(bo, "$(P)ExtSensor$(EXT_SENSOR_ID)_Update-Cmd")
+{
+    field(DESC, "Update ExtSensor$(EXT_SENSOR_ID) Readbacks")
+    field(ZNAM, "Update")
+    field(ONAM, "update")
+    field(FLNK, "$(P)ExtSensor$(EXT_SENSOR_ID)_Update_Fout_")
+    field(HIGH, "2")
+    field( VAL, "1")
+    field(PINI, "YES")
+}
+
+record(fanout, "$(P)ExtSensor$(EXT_SENSOR_ID)_Update_Fout_")
+{
+    field(LNK1, "$(P)ExtSensor$(EXT_SENSOR_ID)-SN-RB")
+}
+
+record(stringin, "$(P)ExtSensor$(EXT_SENSOR_ID)-SN-RB")
+{
+    field(DESC, "Serial Number")
+    field(DTYP, "Snmp")
+    field( INP, "@$(HOST) $(USER) $(M)extSensorDescription.$(EXT_SENSOR_ID) STRING: 40")
+}

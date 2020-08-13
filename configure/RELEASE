@@ -36,6 +36,7 @@ EPICS_BASE=${EPICS_PATH}/epics-base
 # Dependent Modules
 ASYN=${EPICS_MODULES}/asyn
 MODBUS=${EPICS_MODULES}/modbus
+SNMP=${EPICS_MODULES}/snmp
 #
 #STD=${EPICS_MODULES}/std
 #SNCSEQ=${EPICS_MODULES}/seq

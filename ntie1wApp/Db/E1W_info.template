@@ -1,0 +1,23 @@
+# Query current settings and one-time parameters (ID and SN)
+record(bo, "$(P)InfoUpdate-Cmd")
+{
+    field(DESC, "Update setting readbacks")
+    field(ZNAM, "Revert")
+    field(ONAM, "revert")
+    field(FLNK, "$(P)InfoUpdate_Fout_")
+    field(HIGH, "2")
+    field( VAL, "1")
+    field(PINI, "YES")
+}
+
+record(fanout, "$(P)InfoUpdate_Fout_")
+{
+    field(LNK1, "$(P)SYSNAME-RB")
+}
+
+record(stringin, "$(P)SYSNAME-RB")
+{
+    field(DESC, "System Name")
+    field(DTYP, "Snmp")
+    field( INP, "@$(HOST) $(USER) iso.3.6.1.2.1.1.5.0 STRING: 40")
+}

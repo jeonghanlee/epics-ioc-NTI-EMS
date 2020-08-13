@@ -1,0 +1,8 @@
+
+record(stringin, "$(P)ExtSensor$(EXT_SENSOR_ID)-SN-RB")
+{
+    field(DESC, "Serial Number")
+    field(DTYP, "Snmp")
+    field( INP, "@$(HOST) $(USER) $(M)extSensorDescription.$(EXT_SENSOR_ID) STRING: 100")
+    field(SCAN, "10 second")
+}

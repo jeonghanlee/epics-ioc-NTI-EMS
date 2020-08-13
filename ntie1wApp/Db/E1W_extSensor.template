@@ -1,0 +1,91 @@
+# Decimal Digit should be needed to call one time
+# when IOC is started
+record(bo, "$(P)ExtSensor$(ID)_Update-Cmd")
+{
+    field(DESC, "Update ExtSensor$(ID) Readbacks")
+    field(ZNAM, "Update")
+    field(ONAM, "update")
+    field(FLNK, "$(P)ExtSensor$(ID)_Update_Fout_")
+    field(HIGH, "2")
+    field( VAL, "1")
+    field(PINI, "YES")
+}
+
+record(fanout, "$(P)ExtSensor$(ID)_Update_Fout_")
+{
+    field(LNK1, "$(P)ExtSensor$(ID)-SN-RB")
+    field(LNK2, "$(P)ExtSensor$(ID)-Type-RB_")
+    field(LNK3, "$(P)ExtSensor$(ID)-EGU-RB_")
+}
+
+record(stringin, "$(P)ExtSensor$(ID)-SN-RB")
+{
+    field(DESC, "Serial Number")
+    field(DTYP, "Snmp")
+    field( INP, "@$(HOST) $(USER) $(M)extSensorDescription.$(ID) STRING: 40")
+}
+
+record(longin, "$(P)ExtSensor$(ID)-Type-RB_")
+{
+    field(DESC, "SNMP channel")
+    field(DTYP, "Snmp")
+    field( INP, "@$(HOST) $(USER) $(M)extSensorType.$(ID)  ( 100 i")
+}
+
+record(mbbi, "$(P)ExtSensor$(ID)-Type-RB")
+{
+    field(DTYP, "Soft Channel")
+    field( INP, "$(P)ExtSensor$(ID)-Type-RB_ CPP")
+    field(ZRST, "undefined")
+    field(ZRVL, "0")
+    field(ONST, "temperature")
+    field(ONVL, "1")
+    field(TWST, "humidity")
+    field(TWVL, "24")
+    field(THST, "dewPoint")
+}
+
+record(ai, "$(P)ExtSensor$(ID)-EGU-RB_")
+{
+    field(DESC, "SNMP channel")
+    field(DTYP, "Snmp")
+    field( INP, "@$(HOST) $(USER) $(M)extSensorUnit.$(ID) INTEGER: 100")
+}
+
+record(mbbi, "$(P)ExtSensor$(ID)-EGU-RB")
+{
+    field(DTYP, "Soft Channel")
+    field( INP, "$(P)ExtSensor$(ID)-EGU-RB_ CPP")
+    field(ZRST, "degC")
+    field(ZRVL, "0")
+    field(ONST, "degF")
+    field(ONVL, "1")
+    field(FLNK, "$(P)ExtSensor$(ID)-EGU")
+}
+
+record(stringout, "$(P)ExtSensor$(ID)-EGU")
+{
+    field( OUT, "$(P)ExtSensor$(ID)-RB.EGU NPP")
+    field(OMSL, "closed_loop")
+    field( DOL, "$(P)ExtSensor$(ID)-EGU-RB.VAL NPP")
+}
+
+# RB_ returns *10 value, so the real value is 0.1*VAL 
+record(calc, "$(P)ExtSensor$(ID)-RB")
+{
+    field(DESC, "External Sensor $(ID)")
+    field(INPA, "$(P)ExtSensor$(ID)-RB_ CPP")
+    field(INPB, "0.1")
+    field(CALC, "A * B")
+#    field(FLNK, "$(P)ExtSensor$(ID)-EGU")
+}
+
+#ENVIROMUX-1W-MIB::extSensorValue.N           : Integer32 
+record(ai, "$(P)ExtSensor$(ID)-RB_")
+{
+    field(DESC, "External Sensor $(ID)")
+    field(DTYP, "Snmp")
+    field(SCAN, "1 second")
+    field(PREC, "3")
+    field(INP, "@$(HOST) $(USER) $(M)extSensorValue.$(ID) INTEGER: 100")
+}
