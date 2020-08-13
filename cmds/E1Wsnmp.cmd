@@ -15,9 +15,7 @@ epicsEnvSet("DB_TOP", "$(CMDTOP)/ntie1wApp/Db/")
 dbLoadDatabase "$(CMDTOP)/dbd/ntie1w.dbd"
 ntie1w_registerRecordDeviceDriver pdbbase
 
-epicsEnvSet ("EPICS_CAS_INTF_ADDR_LIST","131.243.146.243")
-
-epicsEnvSet("SERVERIP", "128.3.128.180")
+iocshLoad("$(CMDTOP)/e1w.cmd.local")
 
 ##
 epicsEnvSet("MIBDIRS", "+$(CMDTOP)/mibs")

@@ -18,8 +18,10 @@ epicsEnvSet("EPICS_DB_INCLUDE_PATH", "$(DB_TOP)")
 dbLoadDatabase "$(CMDTOP)/dbd/ntie1w.dbd"
 ntie1w_registerRecordDeviceDriver pdbbase
 
+iocshLoad("$(CMDTOP)/e1w.cmd.local")
+
 epicsEnvSet("PORTNAME", "modbus")
-epicsEnvSet("SERVERIP", "128.3.128.180")
+
 epicsEnvSet("PORT", 5020)
 
 iocshLoad("$(IOCSH_TOP)/modbusPortConfigure.iocsh", "TCP_NAME=$(PORTNAME),INET=$(SERVERIP), ASYN_OPT_ENABLE=")
@@ -32,9 +34,6 @@ epicsEnvSet("DATATYPE", FLOAT32_LE_BS)
 
 iocshLoad("$(IOCSH_TOP)/modbusAsynConfigure.iocsh","NAME=$(MOD_NAME),TCP_NAME=$(PORTNAME)")
 
-
-epicsEnvSet ("EPICS_CAS_INTF_ADDR_LIST","131.243.146.243")
-#
 epicsEnvSet("MIBDIRS", "+$(CMDTOP)/mibs")
 
 devSnmpSetSnmpVersion("$(SERVERIP)","SNMP_VERSION_2c")

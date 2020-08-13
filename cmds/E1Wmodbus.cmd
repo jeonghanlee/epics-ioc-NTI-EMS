@@ -16,7 +16,7 @@ dbLoadDatabase "$(CMDTOP)/dbd/ntie1w.dbd"
 ntie1w_registerRecordDeviceDriver pdbbase
 
 epicsEnvSet("PORTNAME", "modbus")
-epicsEnvSet("SERVERIP", "128.3.128.180")
+iocshLoad("$(CMDTOP)/e1w.cmd.local")
 epicsEnvSet("PORT", 5020)
 
 iocshLoad("$(IOCSH_TOP)/modbusPortConfigure.iocsh", "TCP_NAME=$(PORTNAME),INET=$(SERVERIP), ASYN_OPT_ENABLE=")
