@@ -33,4 +33,4 @@
 #
 #- iocshLoad("modbusAsynConfigure.iocsh", "NAME=A0_In_Bits, TCP_NAME=TestMod1, POLLY_DELAY=3000")
 #-
-drvModbusAsynConfigure($(NAME),$(TCP_NAME),$(SERVER_ADDR=1),$(FUNC_CODE=1),$(START_ADDR=0),$(DATA_LENGTH=50),$(DATA_TYPE=0),$(POLL_DELAY),$(MODBUS_TYPE=DefaultModbus))
+drvModbusAsynConfigure($(NAME),$(TCP_NAME),$(SERVER_ADDR=1),$(FUNC_CODE=4),$(START_ADDR=0),$(DATA_LENGTH=52),$(DATA_TYPE=7),$(POLL_DELAY=1000),$(MODBUS_TYPE=DefaultModbus))

@@ -1,0 +1,107 @@
+##        : P 
+##        : R      : Temp
+##        : HOPR   : 125
+##        : HIHI   : 100
+##        : HIGH   :  90
+##        : LOW    :  20
+##        : LOLO   : -40
+##        : LOPR   : -55
+## ------------------------------------
+## MODBUS : PORT   
+## MODBUS : OFFSET          
+## MODBUS : SCAN (default I/O Intr)
+## ------------------------------------
+## SNMP   : ID  
+## SNMP   : HOST
+## SNMP   : USER  (Public)
+## SNMP   : M     (ENVIROMUX-1W-MIB::)
+## ------------------------------------
+## MODBUS 3.1
+
+record(ai, "$(P)$(R=Temp)$(ID)-RB")
+{
+    field(DTYP, "asynFloat64")
+    field(DESC, "E1W Temperature Value")
+    field( INP, "@asyn($(PORT) $(OFFSET)) FLOAT32_LE_BS")
+    field(HOPR, "$(HOPR=125)")
+    field(HIHI, "$(HIHI=100)")
+    field(HIGH, "$(HIGH=90)")
+    field( LOW, "$(LOW=20)")
+    field(LOLO, "$(LOLO=-40)")
+    field(LOPR, "$(LOPR=-55)")
+    field(PREC, "$(PREC=5)")
+    field(SCAN, "$(SCAN=I/O Intr)")
+    field(EGU , "degC")
+}
+
+record(bo, "$(P)$(R=Temp)$(ID)_Update-Cmd")
+{
+    field(DESC, "Update $(ID) Readbacks")
+    field(ZNAM, "Update")
+    field(ONAM, "update")
+    field(FLNK, "$(P)$(R=Temp)$(ID)_Update_Fout_")
+    field(HIGH, "2")
+    field( VAL, "1")
+    field(PINI, "YES")
+}
+
+record(fanout, "$(P)$(R=Temp)$(ID)_Update_Fout_")
+{
+    field(LNK1, "$(P)$(R=Temp)$(ID)-SN-RB")
+    field(LNK2, "$(P)$(R=Temp)$(ID)-TYP_")
+    field(LNK3, "$(P)$(R=Temp)$(ID)-EGU_")
+}
+
+record(stringin, "$(P)$(R=Temp)$(ID)-SN-RB")
+{
+    field(DESC, "Sensor $(ID) Description")
+    field(DTYP, "Snmp")
+    field( INP, "@$(HOST) $(USER=public) $(M=ENVIROMUX-1W-MIB::)extSensorDescription.$(ID) STRING: 40")
+}
+
+record(longin, "$(P)$(R=Temp)$(ID)-TYP_")
+{
+    field(DESC, "Sensor $(ID) Type")
+    field(DTYP, "Snmp")
+    field( INP, "@$(HOST) $(USER=public) $(M=ENVIROMUX-1W-MIB::)extSensorType.$(ID)  ( 100 i")
+}
+
+record(mbbi, "$(P)$(R=Temp)$(ID)-TYP-RB")
+{
+    field(DTYP, "Soft Channel")
+    field( INP, "$(P)$(R=Temp)$(ID)-TYP_ CPP")
+    field(ZRST, "undefined")
+    field(ZRVL, "0")
+    field(ONST, "temperature")
+    field(ONVL, "1")
+    field(TWST, "humidity")
+    field(TWVL, "24")
+    field(THST, "dewPoint")
+}
+
+record(ai, "$(P)$(R=Temp)$(ID)-EGU_")
+{
+    field(DESC, "Sensor $(ID) EGU RB")
+    field(DTYP, "Snmp")
+    field( INP, "@$(HOST) $(USER=public) $(M=ENVIROMUX-1W-MIB::)extSensorUnit.$(ID) INTEGER: 100")
+}
+
+record(mbbi, "$(P)$(R=Temp)$(ID)-EGU-RB")
+{
+    field(DTYP, "Soft Channel")
+    field( INP, "$(P)$(R=Temp)$(ID)-EGU_ CPP")
+    field(ZRST, "degC")
+    field(ZRVL, "0")
+    field(ONST, "degF")
+    field(ONVL, "1")
+    field(FLNK, "$(P)$(R=Temp)$(ID)-EGU")
+}
+
+
+record(stringout, "$(P)$(R=Temp)$(ID)-EGU")
+{
+    field( OUT, "$(P)$(R=Temp)$(ID)-RB.EGU NPP")
+    field(OMSL, "closed_loop")
+    field( DOL, "$(P)$(R=Temp)$(ID)-EGU-RB.VAL NPP")
+}
+

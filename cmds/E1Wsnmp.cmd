@@ -32,7 +32,7 @@ epicsEnvSet("E1WSNMP", "$(SERVERIP)")
 devSnmpSetSnmpVersion("$(E1WSNMP)","SNMP_VERSION_2c")
 
 #devSnmpSetParam(MaxTopPollWeight,30)
-devSnmpSetMaxOidsPerReq(("$(E1WSNMP)",14)
+devSnmpSetMaxOidsPerReq("$(E1WSNMP)",14)
 
 dbLoadRecords("$(DB_TOP)/E1W_info.template","P=$(IOCNAME):,USER=$(USER_R),HOST=$(E1WSNMP)")
 dbLoadRecords("$(DB_TOP)/E1W_extSensor.template","P=$(IOCNAME):,USER=$(USER_R),HOST=$(E1WSNMP),M=$(M),ID=1")
