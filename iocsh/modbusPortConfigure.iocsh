@@ -5,7 +5,8 @@
 #- NOAUTOCONNECT  - ASYN   noAutoconnect, Default : 0
 #-                         0 :    Auto connection
 #-                         1 : no Auto connection
-#- NOPROCESSEOS   - ASYN   noProcessEos, Default : 1
+#- NOPROCESSEOS   - ASYN   noProcessEos, Default : 0
+#-                  https://epics.anl.gov/tech-talk/2020/msg01705.php
 #- LINKTYPE       - MODBUS linktype, Default : 0
 #-                  0 = TCP/IP
 #-                  1 = RTU
@@ -21,7 +22,7 @@
 #- iocshLoad("modbusPortConfigure.iocsh", "TCP_NAME=TestMod1, INET=10.0.0.100, PORT=502, TIMEOUT=3000")
 #-
 #- https://epics.anl.gov/modules/soft/asyn/R4-29/asynDriver.html#drvAsynSerialPort
-drvAsynIPPortConfigure($(TCP_NAME),$(INET=127.0.0.1):$(PORT=5020),$(PRIORITY=0),$(NOAUTOCONNECT=0),$(NOPROCESSEOS=1))
+drvAsynIPPortConfigure($(TCP_NAME),$(INET=127.0.0.1):$(PORT=5020),$(PRIORITY=0),$(NOAUTOCONNECT=0),$(NOPROCESSEOS=0))
 $(ASYN_OPT_ENABLE="#")asynSetOption($(TCP_NAME),0,"disconnectOnReadTimeout", "Y")
 #- http://cars9.uchicago.edu/software/epics/modbusDoc.html
 modbusInterposeConfig($(TCP_NAME),$(LINKTYPE=0),$(TIMEOUT=5000),$(WRITEDELAY=0))
