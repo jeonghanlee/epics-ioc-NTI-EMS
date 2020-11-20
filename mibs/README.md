@@ -2,6 +2,8 @@
 
 ## MIB file `enviromux-1w-v1-00.mib`
 
+Web link : <http://www.networktechinc.com/download/d-environment-monitor-1wire.html>
+
 We should rename it to `ENVIROMUX-1W-MIB` in order to match it with the first line of the mib file definitions such as
 
 ```bash
@@ -25,7 +27,7 @@ dnf install
 ## Preparation
 
 ```bash
-make -p ${HOME}/.snmp/mibs
+mkdir -p ${HOME}/.snmp/mibs
 cp mibs/ENVIROMUX-1W-MIB ${HOME}/.snmp/mibs/
 ```
 
@@ -244,3 +246,16 @@ Accumulated Read PV     | index | maxoids
 ```
 
 So, the golden number is 14. But I cannot see any correlation between them. We have to adjust them later once we have more PVs in that IOC to connect to the same E1W unit.
+
+
+## MIB file `enviromux-5d-v1-21.mib`
+
+Web link : <http://www.networktechinc.com/download/d-environment-monitor-16.html>
+
+We should rename it to `ENVIROMUX5D` in order to match it with the first line of the mib file definitions such as
+
+```bash
+ENVIROMUX5D DEFINITIONS ::= BEGIN
+```
+
+
