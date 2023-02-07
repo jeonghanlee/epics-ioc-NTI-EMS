@@ -1,8 +1,15 @@
 # Modbus EPICS IOC for NTI E1W
 
+**This repository is only for an example, we decided not to use this product due to unknow Modbus connection stabilities. I didn't catch up their latest firmware also.**
+
+If one needs many temperature monitoring channels, I recommend to check the Measurement Computing TC-32 unit.
+
+
 NTI E1W [1] is the low-cost environment monitoring system with 1-wire temperature over Modbus TCP/IP. The NTI E1W also supports the SNMP, but I don't test it yet.
 
 It supports 24 single reading 1-wire sensors in any combination, but this example only has 8 temperature sensors.
+
+
 
 ## Requirements
 
