@@ -1,6 +1,6 @@
 # Modbus EPICS IOC for NTI E1W
 
-**This repository is only for an example, we decided not to use this product due to unknow Modbus connection stabilities. I didn't catch up their latest firmware also.**
+**This repository is only for an example, we decided not to use this product due to unknown Modbus connection stabilities. I didn't catch up their latest firmware also.**
 
 If one needs many temperature monitoring channels, I recommend to check the Measurement Computing TC-32 unit.
 
